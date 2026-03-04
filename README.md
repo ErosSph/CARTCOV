@@ -197,3 +197,22 @@ Common optional options
 | `--sva-max-time <N>`          | int    |                10 | Unrolling bound for temporal operators            |
 | `--rewrite-module-prefixes`   | flag   |             False | Expand assertions per instance (hierarchy)        |
 | `--max-expansions <N>`        | int    |               256 | Limit instance expansions                         |
+
+Examples:
+```bash
+# Minimal
+python coverage_refine_maxsat.py --top top --assertion-file assertions.txt design.sv
+
+# Select an assertion
+python coverage_refine_maxsat.py --top top --assertion-file assertions.txt --assertion-index 3 design.sv
+python coverage_refine_maxsat.py --top top --assertion-file assertions.txt --assertion-label handshake design.sv
+
+# With includes / clock / bound
+python coverage_refine_maxsat.py \
+  --top top \
+  --assertion-file assertions.txt \
+  -I ./include -I ./common \
+  -c clk:1 \
+  --sva-max-time 10 \
+  design.sv
+```
