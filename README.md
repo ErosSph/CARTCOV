@@ -143,4 +143,4 @@ Let `Lines(sig)` be the set of source locations that assign `sig` (and branch lo
 This is a set-cover style optimization over statement/branch locations.
 ### Workflow Diagram
 
-[📄 View the workflow diagram (PDF)](CartCov workflow.pdf)>
+[📄 View the workflow diagram (PDF)](CartCovworkflow.pdf)>
