@@ -1,0 +1,4 @@
+// Counter assertions
+count_reaches_5: ##[0:10] count == 4'b0101
+count_wraps: count == 4'b1111 |-> ##1 count == 4'b0000
+reset_works: rst |-> count == 4'b0000
