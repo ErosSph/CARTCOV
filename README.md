@@ -30,3 +30,16 @@ python coverage_refine_maxsat.py \
     --assertion-file <assertions.txt> \
     <design.v>
 ```
+# Usage
+## Inputs
+CartCov takes three types of inputs: design files, assertions, and analysis configuration (time bound, clock, optional assumptions).
+### Design Under Verification (DUV)
+**Formats**: Verilog/SystemVerilog (.v/.sv), single or multiple files, hierarchical designs supported.
+**Usage**：
+```bash
+python coverage_refine_maxsat.py --top <top_module> file1.v file2.sv ...
+```
+**Include dirs**:
+```bash
+python coverage_refine_maxsat.py --top top -I ./include -I ./common design.sv
+```
