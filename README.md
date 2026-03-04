@@ -142,19 +142,4 @@ Let `Lines(sig)` be the set of source locations that assign `sig` (and branch lo
 
 This is a set-cover style optimization over statement/branch locations.
 ### Workflow Diagram
-RTL + SVA + (assumptions)
-        |
-        +--> Yosys: RTL -> SMT2 + signal map
-        |
-        +--> SVA parser -> SVA -> SMT2 constraints (bounded)
-                      |
-                      +--> (optional) CEGAR proof core -> kept signals/regs
-                                      |
-                                      +--> pyslang coverage DB:
-                                           signal -> stmt lines / branch lines
-                                      |
-                                      +--> MaxSAT set cover on source lines
-                                           minimize #lines s.t. all kept covered
-                                      |
-                                      +--> Output: S/B locations
 
