@@ -7,3 +7,5 @@
 - [Usage](#usage)
 - [Examples](#examples)
 - [License](#license)
+
+# Project info
