@@ -100,3 +100,12 @@ Assertion <label> branches <m>
 B <label> <file>:<line>
 ...
 ```
+**SMT2 mode**: prints the selected hit names from a user-provided hit list:
+```bash
+Minimized hits: <selected> / <total>
+<hit_name_1>
+<hit_name_2>
+...
+```
+## Workflow
+CartCov turns “assertion → covered branch/statement” into a MaxSAT optimization problem. It supports two workflows: **Core refinement mode** (end-to-end from RTL + SVA) and **SMT2 mode** (direct MaxSAT on user-defined hits).
