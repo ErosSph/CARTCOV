@@ -57,7 +57,7 @@ assert property ($rose(start) |-> ##[1:5] done);
 **Supported SVA subset (high level)**:
 | Category | Operators / Functions | Syntax Examples |
 |---|---|---|
-| Implication | `|->`, `|=>` | `req \|-> ack`, `req \|=> ack` |
+| Implication | `\|->`, `\|=>` | `req \|-> ack`, `req \|=> ack` |
 | Delay | `##N`, `##[m:n]` | `##1`, `##[1:5]` |
 | Repetition | `[*N]`, `[*m:n]` | `busy[*3]`, `busy[*1:5]` |
 | Boolean / bitwise | `!`, `&&`, `\|\|`, `&`, `\|`, `^` | `!reset`, `a && b`, `a \|\| b`, `a & b`, `a \| b`, `a ^ b` |
