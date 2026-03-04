@@ -130,4 +130,37 @@ CartCov turns “assertion → covered branch/statement” into a MaxSAT optimiz
 - Variables: one boolean per source location (line).
 - Hard constraints: every kept signal must be covered by ≥1 selected location.
 - Objective: minimize the number of selected locations.
+
 **Output:** minimal statement list (`S ...`) and branch list (`B ...`) per assertion.
+### MaxSAT Formulation (Core mode)
+Let `Lines(sig)` be the set of source locations that assign `sig` (and branch locations guarding those assignments).
+
+- **Hard:** for each `sig` in `kept`, select at least one location that covers it  
+  `∀sig ∈ kept:  OR_{ℓ ∈ Lines(sig)} x_ℓ`
+- **Minimize:** total number of selected locations  
+  `minimize  Σ_{ℓ} I(x_ℓ)`
+
+This is a set-cover style optimization over statement/branch locations.
+### Workflow Diagram
+```mermaid
+flowchart TD
+  A[Inputs<br/>RTL (.v/.sv)<br/>Assertions (SVA)<br/>Assumptions (optional)] --> B[RTL Elaboration / SMT2 Generation<br/>(Yosys)]
+  A --> C[Assertion Parsing<br/>(labels, disable iff, ...)]
+
+  C --> D[SVA -> SMT2 Constraints<br/>(bounded by --sva-max-time)]
+  B --> E[Design SMT2 + Signal Map]
+
+  D --> F[CEGAR Proof Core (optional)<br/>Output: kept regs/signals]
+  E --> F
+
+  F --> G[Coverage Extraction (pyslang)<br/>signal -> stmt lines<br/>signal -> branch lines]
+  G --> H[Build candidates from kept]
+  H --> I[MaxSAT Optimization<br/>Minimize selected locations<br/>s.t. each kept signal covered]
+
+  I --> J[Outputs<br/>S <label> <file>:<line><br/>B <label> <file>:<line>]
+
+  subgraph SMT2_Mode[SMT2 Mode]
+    K[Base SMT2] --> L[Load hits (coverage points)]
+    L --> M[MaxSAT: maximize satisfiable hits]
+    M --> N[Output hit names]
+  end
