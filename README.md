@@ -143,4 +143,35 @@ Let `Lines(sig)` be the set of source locations that assign `sig` (and branch lo
 This is a set-cover style optimization over statement/branch locations.
 ### Workflow Diagram
 
-[📄 View the workflow diagram (PDF)](CartCovworkflow.pdf)>
+[📄 View the workflow diagram (PDF)](CartCovworkflow.pdf)
+
+## Command-line Options
+CartCov supports two modes:
+
+- **SMT2 Mode**: enabled when `--base-smt2` is provided
+- **Core Refinement Mode**: enabled when `--top` and `--assertion-file` are provided
+### SMT2 Mode
+**Required options**
+
+| Option | Type | Description |
+|---|---|---|
+| `--base-smt2 <file>` | file | Base SMT2 file (design + property constraints) |
+| `--hits <file>` | file | Coverage points file (`name: <smt2-bool-expr>`) |
+
+**Optional options**
+
+| Option | Type | Default | Description |
+|---|---|---:|---|
+| `--goal <file>` | file | None | Additional hard constraints (SMT2) |
+| `--require-any` | flag | False | Require at least one hit to be true |
+| `--dump-smt2 <file>` | file | None | Dump combined SMT2 for debugging |
+
+**Example**
+```bash
+python coverage_refine_maxsat.py \
+  --base-smt2 design.smt2 \
+  --hits coverage_points.txt \
+  --goal extra_constraints.txt \
+  --require-any \
+  --dump-smt2 debug.smt2
+```
