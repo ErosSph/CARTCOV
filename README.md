@@ -82,5 +82,21 @@ python coverage_refine_maxsat.py --top top --assertion-file a.txt --sva-max-time
 `-c` / `--clock` `<clk_name>:<period>` (default: `DEFAULT_CLOCK:1` Clock rising edge sampling).
 
 Multi-clock support is limited; single-clock designs are recommended.
-
-
+## What CartCov Computes
+### Coverage Items
+**Statement coverage (S)**: source lines that contain assignments exercised when the assertion holds, including:
+- blocking / non-blocking assignments in procedural blocks
+- assignment expressions in procedural statements
+**Branch coverage (B)**: control-flow decision points taken when the assertion holds:
+-`if/else`
+-`case`
+### Output Modes
+**Core (RTL) mode**: prints covered statements/branches for each assertion:
+```bash
+Assertion <label> statements <k>
+S <label> <file>:<line>
+...
+Assertion <label> branches <m>
+B <label> <file>:<line>
+...
+```
