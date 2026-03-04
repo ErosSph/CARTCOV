@@ -176,13 +176,17 @@ python coverage_refine_maxsat.py \
   --dump-smt2 debug.smt2
 ```
 ### Core Refinement Mode
+
 Required inputs
+
 | Option / Arg              | Type   | Description                                    |
 | ------------------------- | ------ | ---------------------------------------------- |
 | `--top <module>`          | string | Top-level module name                          |
 | `--assertion-file <file>` | file   | Assertion file (SVA)                           |
 | `verilog_files ...`       | files  | One or more `.v/.sv` source files (positional) |
+
 Common optional options
+
 | Option                        | Type   |           Default | Description                                       |
 | ----------------------------- | ------ | ----------------: | ------------------------------------------------- |
 | `--assertion-index <N>`       | int    |                 1 | Select assertion by 1-based index                 |
