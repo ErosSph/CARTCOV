@@ -44,3 +44,25 @@ python coverage_refine_maxsat.py --top <top_module> file1.v file2.sv ...
 ```bash
 python coverage_refine_maxsat.py --top top -I ./include -I ./common design.sv
 ```
+### Assertions
+**File**: a text file specified by --assertion-file.
+
+**One assertion per line**, either as a raw SVA expression or wrapped in assert property(...).
+
+Examples:
+```bash
+req |-> ##1 ack
+assert property ($rose(start) |-> ##[1:5] done);
+```
+**Supported SVA subset (high level)**:
+| Category | Operators / Functions | Syntax Examples |
+|---|---|---|
+| Implication | `|->`, `|=>` | `req \|-> ack`, `req \|=> ack` |
+| Delay | `##N`, `##[m:n]` | `##1`, `##[1:5]` |
+| Repetition | `[*N]`, `[*m:n]` | `busy[*3]`, `busy[*1:5]` |
+| Boolean / bitwise | `!`, `&&`, `\|\|`, `&`, `\|`, `^` | `!reset`, `a && b`, `a \|\| b`, `a & b`, `a \| b`, `a ^ b` |
+| Comparisons (unsigned) | `==`, `!=`, `<`, `<=`, `>`, `>=` | `state == IDLE`, `cnt != 0`, `cnt < 10` |
+| System functions | `$past`, `$stable`, `$rose`, `$fell`, `$onehot0` | `$past(sig, 1)`, `$stable(state)`, `$rose(req)`, `$fell(ack)`, `$onehot0(vec)` |
+| Disable | `disable iff (cond)` | `disable iff (reset) req \|-> ack` |
+
+
