@@ -64,5 +64,14 @@ assert property ($rose(start) |-> ##[1:5] done);
 | Comparisons (unsigned) | `==`, `!=`, `<`, `<=`, `>`, `>=` | `state == IDLE`, `cnt != 0`, `cnt < 10` |
 | System functions | `$past`, `$stable`, `$rose`, `$fell`, `$onehot0` | `$past(sig, 1)`, `$stable(state)`, `$rose(req)`, `$fell(ack)`, `$onehot0(vec)` |
 | Disable | `disable iff (cond)` | `disable iff (reset) req \|-> ack` |
+### Assumptions (optional)
+Use assumptions to constrain the environment (reduce false hits / improve precision).
+```bash
+python coverage_refine_maxsat.py \
+  --top top \
+  --assertion-file assertions.txt \
+  --assume-file assumptions.txt \
+  design.sv
+```
 
 
