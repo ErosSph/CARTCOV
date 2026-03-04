@@ -21,6 +21,7 @@
   - [Command-line Options](#command-line-options)
     - [SMT2 Mode](#smt2-mode)
     - [Core Refinement Mode](#core-refinement-mode)
+- [Join Us](#join-us)
 - [License](#license)
 
 # Project info
@@ -231,3 +232,5 @@ python coverage_refine_maxsat.py \
   --sva-max-time 10 \
   design.sv
 ```
+# Join Us
+Please join us and open an issue.
