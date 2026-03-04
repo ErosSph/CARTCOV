@@ -22,9 +22,11 @@ We recommend using Python 3.10 or later.
 ## Install
 ```bash
 pip install -r requirements-full.txt
+```
 ## Run
 ```bash
 python coverage_refine_maxsat.py \
     --top <top_module> \
     --assertion-file <assertions.txt> \
     <design.v>
+```
