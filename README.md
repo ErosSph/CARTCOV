@@ -78,5 +78,7 @@ CartCov uses BMC to determine the correctness of assertions, therefore it is nec
 ```bash
 python coverage_refine_maxsat.py --top top --assertion-file a.txt --sva-max-time 10 design.sv
 ```
-
+### Clock (optional)
+-c/--clock <clk_name>:<period> (default DEFAULT_CLOCK:1 Clock rising edge sampling).
+Multi-clock support is limited; recommended to use one clock.
 
