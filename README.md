@@ -175,3 +175,21 @@ python coverage_refine_maxsat.py \
   --require-any \
   --dump-smt2 debug.smt2
 ```
+### Core Refinement Mode
+Required inputs
+| Option / Arg              | Type   | Description                                    |
+| ------------------------- | ------ | ---------------------------------------------- |
+| `--top <module>`          | string | Top-level module name                          |
+| `--assertion-file <file>` | file   | Assertion file (SVA)                           |
+| `verilog_files ...`       | files  | One or more `.v/.sv` source files (positional) |
+Common optional options
+| Option                        | Type   |           Default | Description                                       |
+| ----------------------------- | ------ | ----------------: | ------------------------------------------------- |
+| `--assertion-index <N>`       | int    |                 1 | Select assertion by 1-based index                 |
+| `--assertion-label <label>`   | string |              None | Select assertion by label (overrides index)       |
+| `--assume-file <file>`        | file   |              None | Assumptions file (repeatable)                     |
+| `-I, --include <dir>`         | dir    |              `[]` | Include directory for `` `include `` (repeatable) |
+| `-c, --clock <name>:<period>` | string | `DEFAULT_CLOCK:1` | Clock specification                               |
+| `--sva-max-time <N>`          | int    |                10 | Unrolling bound for temporal operators            |
+| `--rewrite-module-prefixes`   | flag   |             False | Expand assertions per instance (hierarchy)        |
+| `--max-expansions <N>`        | int    |               256 | Limit instance expansions                         |
