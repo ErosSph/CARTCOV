@@ -234,3 +234,4 @@ python coverage_refine_maxsat.py \
 ```
 # Join Us
 Please join us and open an issue.
+[](Community.png)
