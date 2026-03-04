@@ -73,5 +73,10 @@ python coverage_refine_maxsat.py \
   --assume-file assumptions.txt \
   design.sv
 ```
+### Time Bound
+CartCov uses BMC to determine the correctness of assertions, therefore it is necessary to set the time boundary (default is small; larger values increase solving time).
+```bash
+python coverage_refine_maxsat.py --top top --assertion-file a.txt --sva-max-time 10 design.sv
+```
 
 
