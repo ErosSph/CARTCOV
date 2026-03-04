@@ -109,3 +109,25 @@ Minimized hits: <selected> / <total>
 ```
 ## Workflow
 CartCov turns “assertion → covered branch/statement” into a MaxSAT optimization problem. It supports two workflows: **Core refinement mode** (end-to-end from RTL + SVA) and **SMT2 mode** (direct MaxSAT on user-defined hits).
+### Core Refinement Mode (End-to-End)
+1) **Parse assertions**
+- Read `--assertion-file` and extract SVA expressions (supports `assert property(...)` wrapper).
+- Optional labels are preserved; otherwise auto-label as `assertion_1`, `assertion_2`, ...
+2) **RTL → SMT2**
+- Use Yosys to elaborate the RTL and generate an SMT2 model of the design.
+- Extract a signal map used by later translations.
+3) **SVA → SMT2 constraints**
+- Translate the supported SVA subset into SMT2 constraints over time steps `s0..sN` (bounded by `--sva-max-time`).
+4) **CEGAR proof core**
+- Run a CEGAR loop to prove the assertion and obtain a **minimal set of registers/signals** needed for the proof (`kept`).
+- This reduces noise and focuses coverage mapping on the assertion’s effective cone.
+5) **Coverage mapping (signals → source locations)**
+- Parse RTL with pyslang and build a database:
+  - `signal -> statement lines` (assignments)
+  - `signal -> branch lines` (control statements guarding those assignments)
+- Collect candidate statement/branch locations for signals in `kept`.
+6) **MaxSAT set cover on source lines**
+- Variables: one boolean per source location (line).
+- Hard constraints: every kept signal must be covered by ≥1 selected location.
+- Objective: minimize the number of selected locations.
+**Output:** minimal statement list (`S ...`) and branch list (`B ...`) per assertion.
