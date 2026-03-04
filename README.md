@@ -142,4 +142,6 @@ Let `Lines(sig)` be the set of source locations that assign `sig` (and branch lo
 
 This is a set-cover style optimization over statement/branch locations.
 ### Workflow Diagram
-
+<object data="CartCov workflow.pdf" type="application/pdf" width="100%" height="700px">
+  <a href="CartCov workflow.pdf">Open the workflow diagram (PDF)</a>
+</object>
